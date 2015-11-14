@@ -1098,7 +1098,13 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 		}
 
 		if ( ! empty( $schema['properties']['featured_image'] ) ) {
-			$data['featured_image'] = (int) get_post_thumbnail_id( $post->ID );
+			// $data['featured_image'] = (int) get_post_thumbnail_id( $post->ID );
+			// replaced with extra information, duh
+			
+			$data['featured_image'] = array(
+				'id'	   => (int) get_post_thumbnail_id( $post->ID ),
+				'url'	   => wp_get_attachment_url( (int) get_post_thumbnail_id( $post->ID ) ),
+			);
 		}
 
 		if ( ! empty( $schema['properties']['parent'] ) ) {
